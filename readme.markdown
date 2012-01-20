@@ -32,3 +32,8 @@ New
     var mapped = arr.map( _.toUpperCase()
                            .slice(0, -1)
                            .replace(rdigit, multiply) );
+
+Result
+---
+
+    ["FO", "BA", "SOME_369_THIN"]

@@ -39,3 +39,10 @@ var _ = (function() {
   });
 
 })();
+
+
+if(typeof exports !== "undefined") {
+  exports = _;
+} else if(typeof window !== "undefined") {
+  window._ = _;
+}
