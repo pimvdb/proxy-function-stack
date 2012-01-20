@@ -4,18 +4,23 @@ proxy-function-stack
 proxy-function-stack is a library built on top of Harmony Proxies. It enables you to write
 functions such as mapping ones easier.
 
+Requirements
+===
+
+Currently only works with the bleeding edge branch of V8.
+
 Example
 ===
 
 Consider the following variables:
 
-    var arr = ["foo", "Bar", "some_123_thing"];
+    var arr = ["foo", "Bar", "some_123_thing"],
 
-    var rdigit = /\d/g;
+        rdigit = /\d/g,
 
-    var multiply = function(x) {
-      return x * 3;
-    };
+        multiply = function(x) {
+          return x * 3;
+        };
 
 Old
 ---

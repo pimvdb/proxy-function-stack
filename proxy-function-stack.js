@@ -1,9 +1,9 @@
 var _ = (function() {
 
-  var stackFactory = function(firstName) {
+  var stackFactory = function(receiver, firstName) {
     var stack = [];
 
-    var genPushStack = function(name) {
+    var genPushStack = function(receiver, name) {
       return function() {
         stack.push({
           f: name,
@@ -11,9 +11,7 @@ var _ = (function() {
         });
 
         return Proxy.createFunction({
-          get: function(receiver, name) {
-            return genPushStack(name);
-          }
+          get: genPushStack
         }, resolve);
       };
     };
@@ -29,20 +27,18 @@ var _ = (function() {
       return res;
     };
 
-    return genPushStack(firstName);
+    return genPushStack.apply(this, arguments);
   }
 
   return Proxy.create({
-    get: function(receiver, name) {
-      return stackFactory(name);
-    }
+    get: stackFactory
   });
 
 })();
 
 
-if(typeof exports !== "undefined") {
-  exports = _;
+if(typeof module !== "undefined" && module.exports) {
+  module.exports.build = build;
 } else if(typeof window !== "undefined") {
-  window._ = _;
+  window.build = build;
 }
