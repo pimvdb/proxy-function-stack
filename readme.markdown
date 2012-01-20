@@ -11,6 +11,8 @@ Consider the following variables:
 
     var arr = ["foo", "Bar", "some_123_thing"];
 
+    var rdigit = /\d/g;
+
     var multiply = function(x) {
       return x * 3;
     };
@@ -18,15 +20,15 @@ Consider the following variables:
 Old
 ---
 
-var mapped = arr.map(function(element) {
-  return element.toUpperCase()
-                .slice(0, -1)
-                .replace(/\d/g, multiply);
-});
+    var mapped = arr.map(function(element) {
+      return element.toUpperCase()
+                    .slice(0, -1)
+                    .replace(rdigit, multiply);
+    });
 
 New
 ---
 
-var mapped = arr.map( _.toUpperCase()
-                       .slice(0, -1)
-                       .replace(/\d/g, multiply) );
+    var mapped = arr.map( _.toUpperCase()
+                           .slice(0, -1)
+                           .replace(rdigit, multiply) );
