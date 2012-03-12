@@ -1,44 +1,45 @@
-var _ = (function() {
-
-  var stackFactory = function(receiver, firstName) {
+(function(Proxy) {
+  function createStackAndAddFirst(receiver, firstName) {
     var stack = [];
 
-    var genPushStack = function(receiver, name) {
+    function addToStack(receiver, name) {
       return function() {
         stack.push({
-          f: name,
-          a: arguments
+          func: name,
+          args: arguments
         });
 
         return Proxy.createFunction({
-          get: genPushStack
+          get: addToStack
         }, resolve);
       };
     };
 
-    var resolve = function(v) {
+    function resolve(v) {
       var res = v,
-          item;
+          current;
 
-      for(var i = 0, l = stack.length; item = stack[i], i < l; i++) {
-        res = res[item.f].apply(res, item.a);
+      for(var i = 0, l = stack.length; current = stack[i]; i++) {
+        res = res[current.func].apply(res, current.args);
       }
 
       return res;
     };
 
-    return genPushStack.apply(this, arguments);
+    return addToStack.apply(this, arguments);
   }
 
-  return Proxy.create({
-    get: stackFactory
-  });
+  function identity(v) {
+    return v;
+  }
 
-})();
+  var pst = Proxy.createFunction({
+    get: createStackAndAddFirst
+  }, identity); // return value directly without a stack
 
-
-if(typeof module !== "undefined" && module.exports) {
-  module.exports.build = build;
-} else if(typeof window !== "undefined") {
-  window.build = build;
-}
+  if(typeof module !== "undefined" && module.exports) {
+    module.exports = pst;
+  } else if(typeof window !== "undefined") {
+    window.pst = pst;
+  }
+})(Proxy);

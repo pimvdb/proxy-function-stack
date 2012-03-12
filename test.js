@@ -1,4 +1,4 @@
-var _ = require("./proxy-function-stack")._,
+var pst = require("./proxy-function-stack"),
 
     arr = ["foo", "Bar", "some_123_thing"],
 
@@ -8,8 +8,9 @@ var _ = require("./proxy-function-stack")._,
       return x * 3;
     },
 
-    mapped = arr.map( _.toUpperCase()
-                       .slice(0, -1)
-                       .replace(rdigit, multiply) );
+    mapped = arr.map( pst.toUpperCase()
+                         .slice(0, -1)
+                         .replace(rdigit, multiply) );
 
 console.log(mapped);
+console.log([1, 2, 3].map(pst));

@@ -1,13 +1,26 @@
 proxy-function-stack
 ===
 
-proxy-function-stack is a library built on top of Harmony Proxies. It enables you to write
-functions such as mapping ones easier.
+proxy-function-stack is a library using ES Harmony proxies. It enables you to
+write functions such as mapping ones easier - no more verbose stuff like:
+
+    arr.map(function(x) { return x.foo().bar(); });
+
+... but just:
+
+    arr.map( pst.foo().bar() );
 
 Requirements
 ===
 
-Currently only works with the bleeding edge branch of V8.
+Works with V8 3.8.8 (node 0.7.1).
+
+Usage
+===
+
+var pst = require("./proxy-function-stack"); // depending on where you put the file
+
+// Now you can use it like the example below shows
 
 Example
 ===
@@ -34,9 +47,9 @@ Old
 New
 ---
 
-    var mapped = arr.map( _.toUpperCase()
-                           .slice(0, -1)
-                           .replace(rdigit, multiply) );
+    var mapped = arr.map( pst.toUpperCase()
+                             .slice(0, -1)
+                             .replace(rdigit, multiply) );
 
 Result
 ---
