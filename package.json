@@ -1,0 +1,29 @@
+{
+  "name": "pst",
+  "version": "1.0.0",
+  "description": "Create mapping functions more easily",
+  "main": "./lib/proxy-function-stack.js",
+  "keywords": [
+    "proxies",
+    "proxy",
+    "stack",
+    "function",
+    "mapping",
+    "array",
+    "arrays"
+  ],
+  "directories" : {
+    "lib": "./lib"
+  },
+  "engine": {
+    "node": ">=0.7.1"
+  },
+  "repository" : {
+    "type": "git",
+    "url": "https://github.com/pimvdb/proxy-function-stack.git"
+  },
+  "author": {
+    "name": "pimvdb",
+    "url": "http://pimvdb.github.com"
+  }
+}

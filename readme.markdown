@@ -1,8 +1,9 @@
 proxy-function-stack
 ===
 
-**proxy-function-stack** is a library using ES Harmony proxies. It enables you to
-write functions such as mapping ones easier - no more verbose stuff like:
+**proxy-function-stack** (`pst`) is a library using ES Harmony proxies. It
+enables you to write functions such as mapping ones easier - no more verbose
+stuff like:
 
     arr.map(function(item) {
       return item.foo().bar();
@@ -12,16 +13,21 @@ write functions such as mapping ones easier - no more verbose stuff like:
 
     arr.map( pst.foo().bar() );
 
+Install
+===
+
+    npm install pst
+
 Requirements
 ===
 
-Works with V8 3.8.8 (node 0.7.1).
+Works with V8 3.8.8 (node 0.7.1). **Make sure to run with the
+`--harmony_proxies` flag!**
 
 Usage
 ===
 
-    // assuming the file is in the same directory as the file requiring it
-    var pst = require("./proxy-function-stack");
+    var pst = require("pst");
 
     // now you can use it like in the example below
 
